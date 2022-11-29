@@ -81,6 +81,10 @@ const createSentryService = () => {
         instance.captureException(error);
       });
     },
+
+    getSettings() {
+      return settings;
+    }
   };
 };
 

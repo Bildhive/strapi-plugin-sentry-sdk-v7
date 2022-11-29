@@ -7,11 +7,21 @@ module.exports = strapi => ({
   initialize() {
     const { sentry } = strapi.plugins['sentry-sdk-v7'].services;
     sentry.init();
+    
+    const settings = sentry.getSettings();
 
     strapi.app.use(async (ctx, next) => {
       try {
         await next();
       } catch (error) {
+        if (settings.skipStatusRange && settings.skipStatusRange.length) {
+          for (const [start, end] of settings.skipStatusRange) {
+            if (error.statusCode >= start && error.statusCode <= end) {
+              throw error;
+            }
+          }
+        }
+
         sentry.sendError(error, (scope, sentryInstance) => {
           scope.addEventProcessor(event => {
             // Parse Koa context to add error metadata
