@@ -53,7 +53,7 @@ describe('strapi-plugin-sentry service', () => {
   });
 
   it('disables Sentry when an invalid DSN is provided', () => {
-    global.strapi.plugins.sentry.config = {
+    global.strapi.plugins['sentry-sdk-v7'].config = {
       dsn: INVALID_DSN,
     };
     sentryService.init();
@@ -69,7 +69,7 @@ describe('strapi-plugin-sentry service', () => {
   });
 
   it('initializes and sends errors', () => {
-    global.strapi.plugins.sentry.config = {
+    global.strapi.plugins['sentry-sdk-v7'].config = {
       dsn: VALID_DSN,
     };
     sentryService.init();
@@ -91,7 +91,7 @@ describe('strapi-plugin-sentry service', () => {
 
   it('does not not send metadata when the option is disabled', () => {
     // Init with metadata option disabled
-    global.strapi.plugins.sentry.config = {
+    global.strapi.plugins['sentry-sdk-v7'].config = {
       dsn: VALID_DSN,
       sendMetadata: false,
     };

@@ -21,7 +21,7 @@ const createSentryService = () => {
       // Retrieve user settings and merge them with the default ones
       settings = {
         ...defaultSettings,
-        ...strapi.plugins.sentry.config,
+        ...strapi.plugins['sentry-sdk-v7'].config,
       };
 
       try {
