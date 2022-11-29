@@ -39,7 +39,7 @@ npm install strapi-plugin-sentry-sdk-v7
 ```js
 module.exports = ({ env }) => ({
   // ...
-  sentry: {
+  'sentry-sdk-v7': {
     dsn: env('SENTRY_DSN'),
     sendMetadata: true,
   },
@@ -123,7 +123,7 @@ You can also completely disable this plugin (both the middleware and the service
 ```js
 module.exports = ({ env }) => ({
   // ...
-  sentry: {
+  'sentry-sdk-v7': {
     dsn: env('NODE_ENV') === 'development' ? null : env('SENTRY_DSN'),
   },
   // ...
