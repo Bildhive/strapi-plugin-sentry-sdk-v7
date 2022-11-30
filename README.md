@@ -31,6 +31,7 @@ npm install strapi-plugin-sentry-sdk-v7
 | `dsn`          | string (`null`)  | Your Sentry data source name ([see Sentry docs](https://docs.sentry.io/product/sentry-basics/dsn-explainer/)).                                                                           |
 | `sendMetadata` | boolean (`true`) | Whether the plugin should attach additional information (like OS, browser, etc.) to the events sent to Sentry.                                                                           |
 | `init`         | object (`{}`)    | A config object that is passed directly to Sentry during the `Sentry.init()`. See all available options [on Sentry's docs](https://docs.sentry.io/platforms/node/configuration/options/) |
+| `skipStatusRange` | array of tuples ([]) | A tuple type of array having the range of http status codes that should not be repoted to sentry when thrown using `ctx.throw(`)
 
 **Example**
 
@@ -42,6 +43,9 @@ module.exports = ({ env }) => ({
   'sentry-sdk-v7': {
     dsn: env('SENTRY_DSN'),
     sendMetadata: true,
+
+    // You may not want to report http exceptions with certain http status codes
+    skipStatusRange: [[400, 499]]
   },
   // ...
 });
