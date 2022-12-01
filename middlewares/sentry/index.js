@@ -47,7 +47,7 @@ module.exports = strapi => ({
           scope.setTag('method', ctx.method);
 
           // Add http details
-          scope.setTag('status_code', error.statusCode);
+          scope.setTag('status_code', errorStatusCode);
         });
         throw error;
       }
