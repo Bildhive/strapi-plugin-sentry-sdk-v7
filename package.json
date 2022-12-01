@@ -8,8 +8,8 @@
     "description": "sentry.plugin.description"
   },
   "dependencies": {
-    "@sentry/node": "^7.2",
-    "@sentry/tracing": "^7.2"
+    "@sentry/node": "^7",
+    "@sentry/tracing": "^7"
   },
   "author": {
     "name": "Strapi team",
