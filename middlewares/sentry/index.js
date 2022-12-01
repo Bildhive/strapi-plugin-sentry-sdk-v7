@@ -35,6 +35,9 @@ module.exports = strapi => ({
           // Manually add Strapi version
           scope.setTag('strapi_version', strapi.config.info.strapi);
           scope.setTag('method', ctx.method);
+
+          // Add http details
+          scope.setTag('status_code', error.statusCode);
         });
         throw error;
       }
