@@ -14,9 +14,19 @@ module.exports = strapi => ({
       try {
         await next();
       } catch (error) {
+        let errorStatusCode;
+        
+        if (error.isBoom) {
+          errorStatusCode = (error.output && error.output.statusCode) || null;
+        }
+
+        if (! errorStatusCode) {
+          errorStatusCode = error.statusCode;
+        }
+        
         if (settings.skipStatusRange && settings.skipStatusRange.length) {
           for (const [start, end] of settings.skipStatusRange) {
-            if (error.statusCode >= start && error.statusCode <= end) {
+            if (errorStatusCode >= start && errorStatusCode <= end) {
               throw error;
             }
           }
