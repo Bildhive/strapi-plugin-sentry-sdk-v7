@@ -48,6 +48,10 @@ module.exports = strapi => ({
 
           // Add http details
           scope.setTag('status_code', errorStatusCode);
+
+          if (typeof settings.errorHook === 'function') {
+            settings.errorHook(scope, ctx, sentryInstance);
+          }
         });
         throw error;
       }
